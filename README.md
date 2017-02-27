@@ -3,9 +3,10 @@ A quick app to get myself familiar with React Native. Implements a simple app fo
 
 To install, download files, cd to extracted folder and run
 
-`npm install
-
-react-native upgrade`
+```
+npm install
+react-native upgrade
+```
 
 and then 
 
