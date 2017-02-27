@@ -9,7 +9,7 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import { AppContainer } from './app/appcontaןner'
+import { AppContainer } from './app/appcontainer'
 
 export default class EstPoker extends Component {
 

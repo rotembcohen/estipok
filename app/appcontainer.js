@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 
-import { Card } from './app/card';
+import { Card } from './card';
 
 export class AppContainer extends Component {
 	constructor(props){
