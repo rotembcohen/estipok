@@ -10,13 +10,17 @@ import { Card } from './card';
 export class AppContainer extends Component {
 	constructor(props){
 		super(props);
-		this.state = {selection: '?'};
-		this.cardSelected = this.cardSelected.bind(this);
+		this.state = {
+      selection: '?',
+      dropZoneValues: null,
+    };
 	}
 
-	cardSelected(name){
-		this.setState({selection: name});
-	}
+  setDropZoneValues(event) {
+    this.setState({
+      dropZoneValues: event.nativeEvent.layout
+    });
+  }
 
 	render() {
 		return (
@@ -30,16 +34,14 @@ export class AppContainer extends Component {
 					</Text>
 				</View>
 				<View style={styles.carddeck}>
-					<Card name="0" pressHandler={this.cardSelected}/>
-					<Card name="1" pressHandler={this.cardSelected}/>
-					<Card name="2" pressHandler={this.cardSelected}/>
-					<Card name="3" pressHandler={this.cardSelected}/>
-					<Card name="5" pressHandler={this.cardSelected}/>
-					<Card name="8" pressHandler={this.cardSelected}/>
+					<Card name="0" dropZoneValues={this.state.dropZoneValues}/>
+					<Card name="1" dropZoneValues={this.state.dropZoneValues}/>
+					<Card name="2" dropZoneValues={this.state.dropZoneValues}/>
+					<Card name="3" dropZoneValues={this.state.dropZoneValues}/>
+					<Card name="5" dropZoneValues={this.state.dropZoneValues}/>
+					<Card name="8" dropZoneValues={this.state.dropZoneValues}/>
 				</View>
-				<View style={styles.selection}>
-					
-				</View>
+				<View style={styles.selection} onLayout={this.setDropZoneValues.bind(this)} />				
 			</View>
 		)
 	}
@@ -84,12 +86,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: 300,
     borderColor: '#87CEEB',
-  },
-  textselected: {
-    fontSize: 300,
-    color: 'white',
-    textShadowColor: 'black',
-    textShadowRadius: 20,
-    textShadowOffset: {height:1}
   },
 });

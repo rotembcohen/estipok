@@ -22,14 +22,22 @@ export class Card extends Component {
 				dy: this.state.pan.y,
 			}]),
 			onPanResponderRelease: (e, gesture) => {
-				Animated.spring(
-					this.state.pan,
-					{toValue:{x:0,y:0}}
-				).start();	
+				if(this.isInDropZone(gesture)){
+					//currently don't do anything
+				} else {
+					Animated.spring(
+						this.state.pan,
+						{toValue:{x:0,y:0}}
+					).start();
+				}
 			},
 		});
 	}
 	
+	isInDropZone(gesture){
+		var dz = this.props.dropZoneValues;
+		return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
+	}
 
 	pressHandler() {
 		this.props.pressHandler(this.props.name);
