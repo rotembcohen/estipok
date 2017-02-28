@@ -38,7 +38,7 @@ export class AppContainer extends Component {
 					<Card name="8" pressHandler={this.cardSelected}/>
 				</View>
 				<View style={styles.selection}>
-					<Text style={styles.textselected}>{this.state.selection}</Text>
+					
 				</View>
 			</View>
 		)
@@ -79,7 +79,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 80,
+    margin: 80,
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    width: 300,
+    borderColor: '#87CEEB',
   },
   textselected: {
     fontSize: 300,

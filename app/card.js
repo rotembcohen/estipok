@@ -4,22 +4,45 @@ import {
   Text,
   View,
   TouchableHighlight,
+  Animated,
+  PanResponder,
 } from 'react-native';
 
 export class Card extends Component {
 	constructor(props){
 		super(props);
 		this.pressHandler = this.pressHandler.bind(this);
+		this.state = {
+			pan: new Animated.ValueXY(),
+		}
+		this.panResponder = PanResponder.create({
+			onStartShouldSetPanResponder: () => true,
+			onPanResponderMove: Animated.event([null,{
+				dx: this.state.pan.x,
+				dy: this.state.pan.y,
+			}]),
+			onPanResponderRelease: (e, gesture) => {
+				Animated.spring(
+					this.state.pan,
+					{toValue:{x:0,y:0}}
+				).start();	
+			},
+		});
 	}
+	
 
 	pressHandler() {
 		this.props.pressHandler(this.props.name);
 	}
 	render() {
 		return (
-			<TouchableHighlight onPress={this.pressHandler} style={styles.card}>
-				<Text style={styles.cardtext}> {this.props.name} </Text>
-			</TouchableHighlight>
+			<View>
+				<Animated.View
+					{...this.panResponder.panHandlers}
+					style = {[this.state.pan.getLayout(),styles.card]}>
+					<Text style={styles.cardtext}> {this.props.name} </Text>
+				</Animated.View>
+			</View>
 		);
 	}
 }
@@ -32,7 +55,7 @@ const styles = StyleSheet.create({
 		borderWidth: 3,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 2,
+		borderRadius: 5,
 		margin: 3,
 		overflow: 'hidden',
 	},
